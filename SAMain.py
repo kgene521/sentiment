@@ -25,7 +25,7 @@ def download_nltk_resources():
     nltk.download('stopwords')
 
 
-def remove_noise(tweet_tokens, stop_words = ()):
+def remove_noise(tweet_tokens, stop_words=()):
     cleaned_tokens = []
     for token, tag in pos_tag(tweet_tokens):
         token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
@@ -201,6 +201,20 @@ def samain():
         " Thank you again for reaching out to us. We always appreciate hearing from our members. " \
         " Rena Carlson-Lammers, DVM " \
         " Chair, Board of Directors, American Veterinary Medical Association "
+
+    custom_tokens = remove_noise(word_tokenize(sample_text))
+
+    print("\nClassify new text:\n" + sample_text + "\n",
+          classifier.classify(dict([token, True] for token in custom_tokens)))
+
+    sample_text = "[SAMPLE POST]\n" \
+          " 1. Unless her name is in the record, you shouldn't have spoken to her as she's not the owner." \
+          " Your receptionists should never have let this call get to you--they need o be retrained." \
+          " 2. Yes I'd call her employer and report her very unprofessional behavior, hopefully " \
+          " they have a professional behavior clause in their employment contract/handbook," \
+          " I wouldn't want her fired, but I'd want her to learn her lesson. 3. Yeah totally " \
+          " bizarre that he wouldn't bring the puppy to her place of work. 4. God, people are such " \
+          " jerks. How frustrating and annoying. "
 
     custom_tokens = remove_noise(word_tokenize(sample_text))
 
